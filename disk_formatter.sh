@@ -38,16 +38,19 @@ val_existence(){
     fi
 }
 
-
-
 Disk_formatter(){
 
 dec=98 #equivale a valor ascii de b
 counter=0
 counter_disk=0
 
-read -p "Cantidad de discos a Formatear ?: " cant
-read -p "Opcion de formateo (RAID)=1, (LVM=2), (Default EXT 4): " receptor
+cant=$1
+receptor=$2
+
+if ! [[  $1 && $2  != "" ]]; then 
+    read -p "Cantidad de discos a Formatear ?: " cant
+    read -p "Opcion de formateo (RAID)=1, (LVM=2), (Default EXT 4): " receptor
+fi 
 
 while [ $counter -lt $cant ]
     do
@@ -81,8 +84,8 @@ while [ $counter -lt $cant ]
 }
 
 main(){
-    Disk_formatter
+    Disk_formatter $1 $2
     
 }
 
-main
+main $1 $2

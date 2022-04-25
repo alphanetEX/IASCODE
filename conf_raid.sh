@@ -57,8 +57,8 @@ Mount_Point(){
     #fstab mount point
     cat <<EOF >> /etc/fstab
 UUID=${disk_uuid[0]} /u01 ext4 defaults 0 0
-UUID=${disk_uuid[2]} /u02 ext4 defaults 0 0
-UUID=${disk_uuid[3]} /u03 ext4 defaults 0 0
+UUID=${disk_uuid[1]} /u02 ext4 defaults 0 0
+UUID=${disk_uuid[2]} /u03 ext4 defaults 0 0
 EOF
     #verifica que realmente fueron montados los volumenes
     mount -a
@@ -73,6 +73,5 @@ main(){
     
     #teniendo el uuid hacer el here doc y montar 
 }
-
 
 main

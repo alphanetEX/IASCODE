@@ -12,7 +12,7 @@ cd tp/
 sudo git clone https://github.com/alphanetEX/srv-tp.git scripts/
 cd scripts/
 sudo chmod 750 conf_raid.sh disk_formatter.sh lamp-conf.sh packages.sh 
-./start.sh
+sudo bash start.sh
 ```
 
 

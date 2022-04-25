@@ -9,8 +9,9 @@ enviar el contenido a la Cloud Vm via Github
 cd /opt
 sudo mkdir -p tp/scripts
 cd tp/
-sudo git clone git@github.com:alphanetEX/srv-tp.git scripts/
-sudo chmod 750 backup_full.sh conf_raid.sh disk_formatter.sh lamp-conf.sh packages.sh 
+sudo git clone https://github.com/alphanetEX/srv-tp.git scripts/
+cd scripts/
+sudo chmod 750 conf_raid.sh disk_formatter.sh lamp-conf.sh packages.sh 
 ./start.sh
 ```
 

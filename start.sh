@@ -19,6 +19,12 @@ Cyan='\033[0;36m'
 NC='\033[0m'
 
 
+function Printer_log {
+    dateX=$(date +"%H:%M:%S")
+    message=$(printf "${dateX} - ${Blue} $1 |${Cyan} $2 ${NC}\n")
+    printf "${message}\n"; printf "${message}\n" >> general.log
+}
+
 Global_sw_hw_conf(){
     #tipo de procesador             
     kernel_data[0]=$(lscpu | sed -n 1p | sed -r 's/.*\ +(\w+).*/\1/')
@@ -159,7 +165,7 @@ Create_User(){
     #\n
     Y
     " 
-    sudo -S sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<< $data | adduser $user >> results.log 
+    sudo -S sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<< $data | adduser $user >> general.log 
     usermod -aG sudo $user
 
     read -p "Desea crear otro usuario y/n?: " confirm
@@ -196,26 +202,17 @@ do
     echo -e "\n"
     case $opcion in 
         
-        1) dateX=$(date +"%H:%M:%S")
-           message=$(printf "${dateX} - ${Blue}Ejecutando packages.sh |${Cyan} Instalando dependencias del servidor ${NC}\n")
-           printf "${message}\n"; printf "${message}\n" >> general.log
+        1) Printer_log "Ejecutando packages.sh" "Instalando dependencias del servidor"
            bash $PWD/packages.sh
-           dateX=$(date +"%H:%M:%S")
-           message=$(printf "${dateX} - ${Blue}Ejecutando disk_formatter.sh |${Cyan} Formateando discos fisicos a formato RAID ${NC}\n")
-           printf "${message}\n"; printf "${message}\n" >> general.log
+           Printer_log "Ejecutando disk_formatter.sh" "Formateando discos fisicos a formato RAID"
            bash $PWD/disk_formatter.sh 2 1
-           dateX=$(date +"%H:%M:%S")
-           message=$(printf "${dateX} - ${Blue}Ejecutando conf_raid.sh |${Cyan} Configurando RAID 1 + LVM, asignando montaje en FSTAB ${NC}\n")
-           printf "${message}\n"; printf "${message}\n" >> general.log
+           Printer_log "Ejecutando conf_raid.sh" "Configurando RAID 1 + LVM, asignando montaje en FSTAB"
            bash $PWD/conf_raid.sh
-           dateX=$(date +"%H:%M:%S")
-           message=$(printf "${dateX} - ${Blue}Ejecutando lamp-conf.sh |${Cyan} Configurando Apache2 + mysql para despliege de produccion ${NC}\n")
-           printf "${message}\n"; printf "${message}\n" >> general.log
+           Printer_log "Ejecutando lamp-conf.sh" "Configurando Apache2 + mysql para despliege de produccion"
            bash $PWD/lamp-conf.sh
            Menu
            ;;
-        2) message=$(printf "${dateX} - ${Blue}Ejecutando disk_formatter.sh |${Cyan} Habilitando menu para formateo ${NC}\n")
-           printf "${message}\n"; printf "${message}\n" >> general.log
+        2) Printer_log "Ejecutando disk_formatter.sh" "Formateando discos fisicos a formato RAID"
            bash $PWD/disk_formatter.sh 
            Menu 
            ;;

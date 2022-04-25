@@ -7,9 +7,9 @@ enviar el contenido a la Cloud Vm via Github
 - Clonar el proyecto a /opt/tp/scripts/
 ```sh 
 cd /opt
-sudo mkdir -p /tp/scripts
+sudo mkdir -p tp/scripts
 cd tp/
-sudo git clone git@github.com:alphanetEX/srv-tp.git beta/
+sudo git clone git@github.com:alphanetEX/srv-tp.git scripts/
 sudo chmod 750 backup_full.sh conf_raid.sh disk_formatter.sh lamp-conf.sh packages.sh 
 ./start.sh
 ```
@@ -27,6 +27,7 @@ rsync -rzt --progress --exclude={'examples/*',.git/*} -r $(pwd)/ root@ip-addr:/o
 $ sudo echo "${USER} ALL= NOPASSWD:/usr/bin/rsync" >> /etc/sudoers 
 ```
 
+- ejecutar en su maquina de tipo (OSX/LINUX)
 ```sh 
 rsync -rzt --progress --exclude={.git/*} --rsync-path="sudo rsync" -r $(pwd)/ user@ip-addr:/opt/tp/scripts/
 ```

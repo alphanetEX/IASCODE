@@ -2,7 +2,7 @@
 - Directivas para La configuracion de un servidor, un proyecto general para el 
   deployment tanto para sistemas cloud o sistemas embebidos de tipo ARM 
 
-enviar el contenido a la Cloud Vm via rsyncs o clonar el proyecto
+enviar el contenido a la Cloud Vm via Github
 
 - Clonar el proyecto a /opt/tp/scripts/
 ```sh 
@@ -10,7 +10,8 @@ cd /opt
 sudo mkdir -p /tp/scripts
 cd tp/
 sudo git clone git@github.com:alphanetEX/srv-tp.git beta/
-sudo chmod 750 backup_full.sh conf_raid.sh disk_formatter.sh lamp-conf.sh packages.sh  ./../start.sh
+sudo chmod 750 backup_full.sh conf_raid.sh disk_formatter.sh lamp-conf.sh packages.sh 
+./start.sh
 ```
 
 

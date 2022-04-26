@@ -13,18 +13,18 @@ mkdir /u02
 fi
 
 #cloando el proyecto de github
-cd /opt/tp/scripts/
-git clone https://github.com/pabloniklas/computacionaplicada.git
-cd computacionaplicada/ 
-cp db.sql ../
-cp index.html ../
+# cd /opt/tp/scripts/
+# git clone https://github.com/pabloniklas/computacionaplicada.git
+# cd computacionaplicada/ 
+# cp db.sql ../
+# cp index.php ../
 
 #creacion y configuracion de permisos y rutas de apache2
 mkdir /u01/proyect-x/
 sudo chmod -R 755 /u01/
 chown -R root:www-data /u01
 
-cp /var/www/html/index.html /u01/proyect-x/
+cp /opt/tp/scripts/index.php /u01/proyect-x/
 cd /etc/apache2/sites-available/ 
 cp 000-default.conf deployx.conf
 
@@ -37,6 +37,10 @@ sed -i -e "16s/.*/        AllowOverride\ None/" deployx.conf
 sed -i -e "17s/.*/        Require\ all\ granted/" deployx.conf
 sed -i -e "18s/.*/    <\/Directory>/" deployx.conf
 
+#enbled php7 on apache2
+a2enmod php7.* 
+#enabled mysqli conexion library on apache2
+sudo phpenmod mysqli
 a2dissite 000-default.conf 
 a2ensite deployx.conf
 
@@ -54,12 +58,6 @@ EOFMYSQLSECURE
 # Note down this password. Else you will lose it and you may have to reset the admin password in mySQL
 echo -e "SUCCESS! MySQL password is: ${PASS_MYSQL_ROOT}" 
 
-#montar pagina web en apache 
-
-
-
-
-#establecer permisos de un usuario sudo 
 #creacion y configuracion de permisos y rutas de mysql 
 chown -R mysql:mysql /u02 
 systemctl stop mysql
@@ -68,8 +66,7 @@ cd /etc/mysql/mysql.conf.d/
 sed -i -e "32s/.*/datadir         = \/u02/" mysqld.cnf
 systemctl start mysql
 
-#importacion de base de datos a mysql
-
+cd /opt/tp/scripts/
 
 #$passw | sudo -S mysql -u root -p ${PASS_MYSQL_ROOT} < db.sql 
 mysql -u root -p ${PASS_MYSQL_ROOT} < db.sql 

@@ -67,6 +67,5 @@ sed -i -e "32s/.*/datadir         = \/u02/" mysqld.cnf
 systemctl start mysql
 
 cd /opt/tp/scripts/
-
 #$passw | sudo -S mysql -u root -p ${PASS_MYSQL_ROOT} < db.sql 
-mysql -u root -p ${PASS_MYSQL_ROOT} < db.sql 
+mysql -u root -p${PASS_MYSQL_ROOT}  < db.sql 

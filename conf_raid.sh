@@ -7,22 +7,13 @@ madnm_cmd="#\n
 y
 "
 
-Disk_counter(){
-    dec=$1 #equivale a valor ascii de b
-    hex=$(printf "%x\n" $dec);
-    alphabet=$(printf "\x$hex");
-    validator=$(val_existence $alphabet);
-    echo $validator
-}
-
-
-Raid_creation(){
+RaidCreation(){
     sudo -S sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/'  <<< $madnm_cmd | sudo -S mdadm --create /dev/md0 --level=1 --raid-disks=2 /dev/xvdb /dev/xvdc >> raid1.log 2<&1
     mkfs.ext4 /dev/md0 
     mdadm --detail --scan >> /etc/mdadm/mdadm.conf
 }
 
-Lvm_creation(){
+LvmCreation(){
     #using /md0
     vgcreate vg_tp  /dev/md0
 
@@ -42,7 +33,7 @@ Lvm_creation(){
 }
 
 
-Mount_Point(){
+MountPoint(){
     counter=0; 
     # mount /dev/vg_tp/lv_www     /u01
     # mount /dev/vg_tp/lv_db      /u02
@@ -68,9 +59,9 @@ EOF
 
 main(){
 
-    Raid_creation
-    Lvm_creation
-    Mount_Point
+    RaidCreation
+    LvmCreation
+    MountPoint
     
     #teniendo el uuid hacer el here doc y montar 
 }

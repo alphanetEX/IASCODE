@@ -8,7 +8,7 @@ Cyan='\033[0;36m'
 NC='\033[0m'
 
 
-function Printer_log {
+function PrinterLog {
     #codigo de procedimientos 
     if [[ $1 == 0 ]]; then
         dateX=$(date +"%H:%M:%S")

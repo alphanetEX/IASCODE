@@ -198,25 +198,24 @@ do
     echo -e "\n"
     case $opcion in 
         
-        1) Printer_log 0 "Ejecutando packages.sh" "Instalando dependencias del servidor"
+        1) PrinterLog 0 "Ejecutando packages.sh" "Instalando dependencias del servidor"
            bash $PWD/packages.sh
-           Printer_log 0 "Ejecutando disk_formatter.sh" "Formateando discos fisicos a formato RAID"
+           PrinterLog 0 "Ejecutando disk_formatter.sh" "Formateando discos fisicos a formato RAID"
            bash $PWD/disk_formatter.sh 2 1
-           Printer_log 0 "Ejecutando conf_raid.sh" "Configurando RAID 1 + LVM, asignando montaje en FSTAB"
+           PrinterLog 0 "Ejecutando conf_raid.sh" "Configurando RAID 1 + LVM, asignando montaje en FSTAB"
            bash $PWD/conf_raid.sh
-           Printer_log 0 "Ejecutando lamp-conf.sh" "Configurando Apache2 + mysql para despliege de produccion"
-           bash $PWD/lamp-conf.sh
+           PrinterLog 0 "Ejecutando lamp-conf.sh" "Configurando Apache2 + mysql para despliege de produccion"
+           bash $PWD/lamp_conf.sh
            Menu
            ;;
-        2) ≈
-           bash $PWD/disk_formatter.sh 
+        2) bash $PWD/disk_formatter.sh 
            Menu 
            ;;
         3)
            echo "instalado con exito"
            Menu
            ;;
-        4) Printer_log "ejecutando test.sh" "Estableciendo configuraciones de APACHE2 + MYSQL...E04"
+        4) PrinterLog "ejecutando test.sh" "Estableciendo configuraciones de APACHE2 + MYSQL...E04"
            sleep 3
            echo "instalado con exito"
            Menu 

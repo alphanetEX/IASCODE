@@ -11,6 +11,7 @@ unset tegra_version[3]
 unset cpu_verstion
 unset confirm
 unset dateX
+source general_print.sh
 
 Green='\033[0;32m'
 Red='\033[0;31m'
@@ -19,11 +20,6 @@ Cyan='\033[0;36m'
 NC='\033[0m'
 
 
-function Printer_log {
-    dateX=$(date +"%H:%M:%S")
-    message=$(printf "${dateX} - ${Blue} $1 |${Cyan} $2 ${NC}\n")
-    printf "${message}\n"; printf "${message}\n" >> general.log
-}
 
 Global_sw_hw_conf(){
     #tipo de procesador             
@@ -202,17 +198,17 @@ do
     echo -e "\n"
     case $opcion in 
         
-        1) Printer_log "Ejecutando packages.sh" "Instalando dependencias del servidor"
+        1) Printer_log 0 "Ejecutando packages.sh" "Instalando dependencias del servidor"
            bash $PWD/packages.sh
-           Printer_log "Ejecutando disk_formatter.sh" "Formateando discos fisicos a formato RAID"
+           Printer_log 0 "Ejecutando disk_formatter.sh" "Formateando discos fisicos a formato RAID"
            bash $PWD/disk_formatter.sh 2 1
-           Printer_log "Ejecutando conf_raid.sh" "Configurando RAID 1 + LVM, asignando montaje en FSTAB"
+           Printer_log 0 "Ejecutando conf_raid.sh" "Configurando RAID 1 + LVM, asignando montaje en FSTAB"
            bash $PWD/conf_raid.sh
-           Printer_log "Ejecutando lamp-conf.sh" "Configurando Apache2 + mysql para despliege de produccion"
+           Printer_log 0 "Ejecutando lamp-conf.sh" "Configurando Apache2 + mysql para despliege de produccion"
            bash $PWD/lamp-conf.sh
            Menu
            ;;
-        2) Printer_log "Ejecutando disk_formatter.sh" "Formateando discos fisicos a formato RAID"
+        2) ≈
            bash $PWD/disk_formatter.sh 
            Menu 
            ;;
@@ -220,7 +216,7 @@ do
            echo "instalado con exito"
            Menu
            ;;
-        4) echo "Estableciendo configuraciones de APACHE2 + MYSQL...E04"
+        4) Printer_log "ejecutando test.sh" "Estableciendo configuraciones de APACHE2 + MYSQL...E04"
            sleep 3
            echo "instalado con exito"
            Menu 

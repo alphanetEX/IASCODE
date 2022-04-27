@@ -7,6 +7,10 @@ sudo apt-get upgrade -y
 sudo apt-get install mdadm -y 
 sudo apt-get install lvm2 -y
 sudo apt-get install git -y
+sudo apt-get install rsync 
+
+#establecer hora de buenos aires
+sudo -S timedatectl set-timezone "America/Argentina/Buenos_Aires"
 
 PASS_MYSQL_ROOT=`openssl rand -base64 12` # Save this password 
 echo "PASS_MYSQL_ROOT=${PASS_MYSQL_ROOT}" >> .env

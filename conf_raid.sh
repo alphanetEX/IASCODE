@@ -50,10 +50,11 @@ Mount_Point(){
 
     while [ $counter -lt 3 ]
         do
-         disk_uuid[$counter]=$(blkid | grep "mapper/vg_tp" | sed -r 's/.*([0-9a-z]{8})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{12}).*/\1-\2-\3-\4-\5/' | sed -n "$((counter +1))"p)
+        disk_uuid[$counter]=$(blkid | grep "mapper/vg_tp" | sed -r 's/.*([0-9a-z]{8})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{4})-([0-9a-z]{12}).*/\1-\2-\3-\4-\5/' | sed -n "$((counter +1))"p)
+        printf "u0$((counter+1))=${disk_uuid[$counter]}\n" >> .env
         ((counter ++))
     done
-    
+    #printf "${disk_uuid[@]}" >> .env
     #fstab mount point
     cat <<EOF >> /etc/fstab
 UUID=${disk_uuid[0]} /u01 ext4 defaults 0 0
@@ -75,3 +76,5 @@ main(){
 }
 
 main
+
+

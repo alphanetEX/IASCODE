@@ -1,6 +1,7 @@
+#!/bin/bash
 #AUTHOR: AlphanetEX, backup mode
 unset disk_uuid[3]
-source general_print.sh
+source /opt/tp/scripts/general_print.sh
 
 #obtener las variables del archivo .env
 [ ! -f .env ] || export $(grep -v '^#' .env | xargs)

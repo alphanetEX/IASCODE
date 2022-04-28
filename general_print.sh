@@ -13,22 +13,22 @@ function PrinterLog {
     if [[ $1 == 0 ]]; then
         dateX=$(date +"%H:%M:%S")
         message=$(printf "${dateX} - ${Blue}$2 |${Cyan} $3 ${NC}\n")
-        printf "${message}\n"; printf "${message}\n" >> general.log
+        printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log
     #codigos de backups 
     elif [[ $1 == 1 ]]; then 
         dateX=$(date +"%H:%M:%S")
         message=$(printf "${dateX} - ${Blue}$2 |${Green} $3 ${NC}\n")
-        printf "${message}\n"; printf "${message}\n" >> general.log 
+        printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log
     #codigos de monior
     elif [[ $1 == 2 ]]; then 
         dateX=$(date +"%H:%M:%S")
         message=$(printf "${dateX} - ${Blue}$2 |${Yellow} $3 ${NC}\n")
-        printf "${message}\n"; printf "${message}\n" >> general.log 
+        printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log 
     #codigos de error 
     elif [[ $1 == 3 ]]; then
         dateX=$(date +"%H:%M:%S")
         message=$(printf "${dateX} - ${Blue}$2 |${Red} $3 ${NC}\n")
-        printf "${message}\n"; printf "${message}\n" >> general.log 
+        printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log
     fi
 }
 

@@ -11,6 +11,7 @@ sudo apt-get install rsync
 
 #establecer hora de buenos aires
 sudo -S timedatectl set-timezone "America/Argentina/Buenos_Aires"
+sudo -S /etc/init.d/cron restart
 
 PASS_MYSQL_ROOT=`openssl rand -base64 12` # Save this password 
 echo "PASS_MYSQL_ROOT=${PASS_MYSQL_ROOT}" >> .env

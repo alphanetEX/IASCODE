@@ -48,7 +48,7 @@ function BackupFiles {
 
 #ejecutar funciones en crontab
 #backup del item 4.A 
-function Backup_A {
+function BackupA {
     valuuids=$(ValidateUuids)
     if [[ $valuuids == true ]]; then
     BackupFiles /etc/ /u03/
@@ -57,7 +57,7 @@ function Backup_A {
 }
 
 #backup del item 4.B
-function Backup_B {
+function BackupB {
     valuuids=$(ValidateUuids)
     if [[ $valuuids == true ]]; then
     BackupFiles /u01/ /u03/

@@ -186,9 +186,7 @@ do
 
     echo "0. Salir"
     echo "1. Automatizacion de entorno de desarrollo"
-    echo "2. formateo de discos"
-    echo "3. Opciones de Backup"
-    echo "5. Opciones de monitoreo"
+    echo "2. Formateo de discos"
 
     #capture data
     
@@ -209,15 +207,7 @@ do
            Menu
            ;;
         2) bash $PWD/disk_formatter.sh 
-           Menu 
-           ;;
-        3)
-           echo "instalado con exito"
-           Menu
-           ;;
-        4) PrinterLog "ejecutando test.sh" "Estableciendo configuraciones de APACHE2 + MYSQL...E04"
-           sleep 3
-           echo "instalado con exito"
+           PrinterLog 0 "Ejecutando disk_formatter.sh" "Formateando discos"
            Menu 
            ;;
         0) echo "Salir"

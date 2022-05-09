@@ -61,4 +61,5 @@ systemctl start mysql
 
 cd /opt/tp/scripts/
 #$passw | sudo -S mysql -u root -p ${PASS_MYSQL_ROOT} < db.sql 
-mysql -u root -p${PASS_MYSQL_ROOT} < db.sql 
+mysql -u root -p${PASS_MYSQL_ROOT} < db.sql
+mysql -u root -p${PASS_MYSQL_ROOT} < feriados.sql

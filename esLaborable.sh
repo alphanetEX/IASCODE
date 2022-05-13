@@ -49,5 +49,3 @@ query[2]=$(sed -r 's/\"(.*)\"/\1/' <<< $(cut -d ';' -f3 results.csv))
 [[ -z ${query[0]} && -z ${query[1]} && -z ${query[2]} ]] && PrinterLog 4 "Base de datos" "no hay feriado" || PrinterLog 4 "Base de datos" "${query[2]}"
 
 }
-
-esLaborable $1

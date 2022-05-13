@@ -11,7 +11,8 @@ sudo mkdir -p tp/scripts
 cd tp/
 sudo git clone https://github.com/alphanetEX/srv-tp.git scripts/
 cd scripts/
-sudo chmod 750 conf_raid.sh disk_formatter.sh lamp-conf.sh packages.sh 
+sudo chmod 750 conf_raid.sh  disk_formatter.sh lamp-conf.sh packages.sh feriados.sh
+sudo chmod 733 general_print.sh backup_full.sh
 sudo bash start.sh
 ```
 
@@ -39,7 +40,7 @@ rsync -rzt --progress --exclude={.git/*} --rsync-path="sudo rsync" -r $(pwd)/ us
 
 ## dentro de ese directorio ejecute
 ```sh 
-$ ./start.sh
+$ sudo bash start.sh
 ```
 ###### si en caso hay problemas de ejecucion ejecute permisos 750 a cada unos de los archivos del directorio
 

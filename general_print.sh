@@ -5,6 +5,8 @@ Yellow='\033[0;33m'
 Red='\033[0;31m'
 Blue='\033[0;34m'
 Cyan='\033[0;36m'
+Lgray='\033[0;37m'
+Magenta='\033[0;35m'
 NC='\033[0m'
 
 
@@ -28,6 +30,10 @@ function PrinterLog {
     elif [[ $1 == 3 ]]; then
         dateX=$(date +"%H:%M:%S")
         message=$(printf "${dateX} - ${Blue}$2 |${Red} $3 ${NC}\n")
+        printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log
+    elif [[ $1 == 4 ]]; then
+        dateX=$(date +"%H:%M:%S")
+        message=$(printf "${dateX} - ${Lgray}$2 |${Magenta} $3 ${NC}\n")
         printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log
     fi
 }

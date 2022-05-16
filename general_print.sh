@@ -14,26 +14,26 @@ function PrinterLog {
     #codigo de procedimientos 
     if [[ $1 == 0 ]]; then
         dateX=$(date +"%H:%M:%S")
-        message=$(printf "${dateX} - ${Blue}$2 |${Cyan} $3 ${NC}\n")
+        message=$(printf "${dateX} - ${Blue} $2 |${Cyan} $3 ${NC}\n")
         printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log
     #codigos de backups 
     elif [[ $1 == 1 ]]; then 
         dateX=$(date +"%H:%M:%S")
-        message=$(printf "${dateX} - ${Blue}$2 |${Green} $3 ${NC}\n")
+        message=$(printf "${dateX} - ${Blue} $2 |${Green} $3 ${NC}\n")
         printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log
     #codigos de monior
     elif [[ $1 == 2 ]]; then 
         dateX=$(date +"%H:%M:%S")
-        message=$(printf "${dateX} - ${Blue}$2 |${Yellow} $3 ${NC}\n")
+        message=$(printf "${dateX} - ${Blue} $2 |${Yellow} $3 ${NC}\n")
         printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log 
     #codigos de error 
     elif [[ $1 == 3 ]]; then
         dateX=$(date +"%H:%M:%S")
-        message=$(printf "${dateX} - ${Blue}$2 |${Red} $3 ${NC}\n")
+        message=$(printf "${dateX} - ${Blue} $2 |${Red} $3 ${NC}\n")
         printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log
     elif [[ $1 == 4 ]]; then
         dateX=$(date +"%H:%M:%S")
-        message=$(printf "${dateX} - ${Lgray}$2 |${Magenta} $3 ${NC}\n")
+        message=$(printf "${dateX} - ${Lgray} $2 |${Magenta} $3 ${NC}\n")
         printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log
     fi
 }

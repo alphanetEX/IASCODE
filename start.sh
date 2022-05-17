@@ -204,6 +204,8 @@ do
            bash $PWD/conf_raid.sh
            PrinterLog 0 "Ejecutando lamp-conf.sh" "Configurando Apache2 + mysql para despliege de produccion"
            bash $PWD/lamp_conf.sh
+           PrinterLog 0 "Ejecutando mailFireMonitor.sh" "Configurando dependencias de mail, crontab y firewall"
+           bash $PWD/mailFireMonitor.sh
            Menu
            ;;
         2) bash $PWD/disk_formatter.sh 

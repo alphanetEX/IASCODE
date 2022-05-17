@@ -7,7 +7,9 @@ sudo apt-get upgrade -y
 sudo apt-get install mdadm -y 
 sudo apt-get install lvm2 -y
 sudo apt-get install git -y
-sudo apt-get install rsync 
+sudo apt-get install rsync -y
+#mail sender
+sudo apt-get install mutt -y 
 
 #establecer hora de buenos aires
 sudo -S timedatectl set-timezone "America/Argentina/Buenos_Aires"

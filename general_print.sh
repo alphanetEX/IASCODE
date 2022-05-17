@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[ ! -f .env ] || export $(grep -v '^#' .env | xargs)
+
 Green='\033[0;32m'
 Yellow='\033[0;33m'
 Red='\033[0;31m'
@@ -21,11 +23,18 @@ function PrinterLog {
         dateX=$(date +"%H:%M:%S")
         message=$(printf "${dateX} - ${Blue} $2 |${Green} $3 ${NC}\n")
         printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log
+
+        #envio de log del backup al mail 
+        printf "${message}\n" >> /opt/tp/scripts/emailSender.log
+        echo "" | mutt -s "Backup Process" -i emailSender.log -a emailSender.log -c ${DESTEMAIL}
+        echo "" > emailSender.log
     #codigos de monior
     elif [[ $1 == 2 ]]; then 
         dateX=$(date +"%H:%M:%S")
         message=$(printf "${dateX} - ${Blue} $2 |${Yellow} $3 ${NC}\n")
-        printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log 
+        printf "${message}\n"; printf "${message}\n" >> /opt/tp/scripts/general.log
+        #seccion de envio de mail al root 
+
     #codigos de error 
     elif [[ $1 == 3 ]]; then
         dateX=$(date +"%H:%M:%S")

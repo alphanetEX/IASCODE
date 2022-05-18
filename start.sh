@@ -199,16 +199,16 @@ do
         1) PrinterLog 0 "Ejecutando packages.sh" "Instalando dependencias del servidor"
            bash $PWD/packages.sh
            PrinterLog 0 "Ejecutando disk_formatter.sh" "Formateando discos fisicos a formato RAID"
-           bash $PWD/disk_formatter.sh 2 1
+           bash $PWD/diskFormatter.sh 2 1
            PrinterLog 0 "Ejecutando conf_raid.sh" "Configurando RAID 1 + LVM, asignando montaje en FSTAB"
-           bash $PWD/conf_raid.sh
+           bash $PWD/confRaid.sh
            PrinterLog 0 "Ejecutando lamp-conf.sh" "Configurando Apache2 + mysql para despliege de produccion"
-           bash $PWD/lamp_conf.sh
+           bash $PWD/lampConf.sh
            PrinterLog 0 "Ejecutando mailFireMonitor.sh" "Configurando dependencias de mail, crontab y firewall"
            bash $PWD/mailFireMonitor.sh
            Menu
            ;;
-        2) bash $PWD/disk_formatter.sh 
+        2) bash $PWD/diskFormatter.sh 
            PrinterLog 0 "Ejecutando disk_formatter.sh" "Formateando discos"
            Menu 
            ;;

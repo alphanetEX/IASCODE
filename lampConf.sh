@@ -4,13 +4,9 @@ apache_conf="/etc/apache2/sites-available/"
 #read .env file it works 
 [ ! -f .env ] || export $(grep -v '^#' .env | xargs)
 
-if [[ ! -d /u01 ]]; then
-mkdir /u01
-fi
+[[ ! -d /u01 ]] && mkdir /u01
 
-if [[ ! -d /u02 ]]; then
-mkdir /u02
-fi
+[[ ! -d /u02 ]] && mkdir /u02
 
 #creacion y configuracion de permisos y rutas de apache2
 mkdir /u01/proyect-x/

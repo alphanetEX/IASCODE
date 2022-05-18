@@ -10,13 +10,31 @@ if [[ ! -d ~/.mutt ]]; then
     touch ~/.mutt/muttrc
 fi
 
+#validacion para input en blanco
+notEmpty() {
+    text=$1
+    variable=$2
+    if [[ -z $variable ]]; then 
+    read -p "$text" variable
+
+    notEmpty "$text" $variable
+    else
+        echo "$variable"
+    fi  
+}
+
 function mailConf {
     read -p "Ingrese su Correo electronico(gmail): " email
-    read -p "Ingrese su nombre de Mail: " namemail
-    read -p "Ingrese el mail destinatario de los logs: " destemail
-    echo "DESTEMAIL=${destemail}" >> .env
-    Password_Hider "ingrese la contrasenia del correo: " 
+    email=$(notEmpty "Ingrese su Correo electronico(gmail): " $email)
+    Password_Hider "ingrese la contrasenia del correo: "
     pwx_0=$password
+    
+    read -p "Ingrese su nombre de Mail: " namemail
+    namemail=$(notEmpty "Ingrese su nombre de Mail: " $namemail)
+   
+    read -p "Ingrese el mail destinatario de los logs: " destemail
+    destemail=$(notEmpty "Ingrese el mail destinatario de los logs: " $namemail)
+    echo "DESTEMAIL=${destemail}" >> .env
 
 cat <<EOF >> ~/.mutt/muttrc
 set ssl_starttls=yes

@@ -1,5 +1,5 @@
 #!/bin/bash
-source /opt/tp/scripts/general_print.sh
+source /opt/tp/scripts/generalPrint.sh
 #recorrido de apache2, mysqld, mdadm, lvm
 SERVICE=$1 
 # agregar una negacion con if de corchetes 

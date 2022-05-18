@@ -11,8 +11,8 @@ sudo mkdir -p tp/scripts
 cd tp/
 sudo git clone https://github.com/alphanetEX/srv-tp.git scripts/
 cd scripts/
-sudo chmod 750 conf_raid.sh  disk_formatter.sh lamp-conf.sh packages.sh esLaborable.sh testEsLaborable.sh 
-sudo chmod 733 general_print.sh backup_full.sh
+sudo chmod 750 confRaid.sh  diskFormatter.sh lampConf.sh packages.sh esLaborable.sh testEsLaborable.sh mailFireMonitor.sh monitor.sh
+sudo chmod 733 generalPrint.sh backupFull.sh
 sudo bash start.sh
 ```
 

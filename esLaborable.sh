@@ -1,6 +1,6 @@
 #!/bin/bash
 [ ! -f .env ] || export $(grep -v '^#' .env | xargs)
-source /opt/tp/scripts/general_print.sh
+source /opt/tp/scripts/generalPrint.sh
 unset query[3]
 
 function tercer_lunes {
@@ -35,9 +35,9 @@ OPTIONALLY ENCLOSED BY '\"'
 LINES TERMINATED BY '\r\n';
 EOF
 
-else
-        PrinterLog 3 "validacion de fecha" "la fecha $dateX al parecer no es una fecha"
-        echo "" > results.csv
+else 
+    PrinterLog 3 "validacion de fecha" "la fecha $dateX al parecer no es una fecha"
+    echo "" > results.csv
 fi
 
 query[0]=$(sed -r 's/\"(.*)\"/\1/' <<< $(cut -d ';' -f1 results.csv))

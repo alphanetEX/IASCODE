@@ -24,9 +24,9 @@ sudo apt-get install apache2 apache2-doc apache2-utils -y
 sudo apt-get install php libapache2-mod-php php-mysql -y 
 
 #mysql packages  continue here 
-apt-get install gnupg -y
+sudo -S apt-get install gnupg -y
 cd /tmp/
-wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
+sudo wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
 sudo dpkg -i mysql-apt-config_0.8.22-1_all.deb
 
 # Install MySQL Server in a Non-Interactive mode. Default root password will be "${PASS_MYSQL_ROOT}"

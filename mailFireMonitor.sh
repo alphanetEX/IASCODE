@@ -10,14 +10,24 @@ if [[ ! -d ~/.mutt ]]; then
     touch ~/.mutt/muttrc
 fi
 
-#validacion para input en blanco
+#validacion para input passsword en blanco
+notEmptyPwx(){
+    text=$1
+    result=$2
+    if [[ -z $result ]]; then 
+    Password_Hider "$text"
+    pwx_0=$password
+    notEmptyPwx "$text" $pwx_0
+    fi 
+}
+
+#validacion para read -p 
 notEmpty() {
     text=$1
     variable=$2
     if [[ -z $variable ]]; then 
     read -p "$text" variable
-
-    notEmpty "$text" $variable
+    notEmpty "$text" $variable    
     else
         echo "$variable"
     fi  
@@ -26,14 +36,15 @@ notEmpty() {
 function mailConf {
     read -p "Ingrese su Correo electronico(gmail): " email
     email=$(notEmpty "Ingrese su Correo electronico(gmail): " $email)
-    Password_Hider "ingrese la contrasenia del correo: "
-    pwx_0=$password
-    
+    PasswordHider "ingrese la contrasenia del correo: "
+    pwx_0=$assword
+    #validacion de espcio en blanco de la  passwd
+    notEmptyPwx "ingrese la contrasenia del correo: " $pwx_0
     read -p "Ingrese su nombre de Mail: " namemail
     namemail=$(notEmpty "Ingrese su nombre de Mail: " $namemail)
    
     read -p "Ingrese el mail destinatario de los logs: " destemail
-    destemail=$(notEmpty "Ingrese el mail destinatario de los logs: " $namemail)
+    destemail=$(notEmpty "Ingrese el mail destinatario de los logs: " $destemail)
     echo "DESTEMAIL=${destemail}" >> .env
 
 cat <<EOF >> ~/.mutt/muttrc
@@ -65,12 +76,10 @@ EOF
 
 mailConf
 
-
-
-# cat <<EOF >> var/spool/cron/crontabs/root
-# 00 11 * * * /opt/tp/scripts/backup_full.sh BackupA
-# 00 11 * * 0 /opt/tp/scripts/backup_full.sh BackupB 
-# EOF
+cat <<EOF >> var/spool/cron/crontabs/root
+00 11 * * * /opt/tp/scripts/backup_full.sh BackupA
+00 11 * * 0 /opt/tp/scripts/backup_full.sh BackupB 
+EOF
 
 
 #seccion de monitoreo 

@@ -15,7 +15,7 @@ notEmptyPwx(){
     text=$1
     result=$2
     if [[ -z $result ]]; then 
-    Password_Hider "$text"
+    PasswordHider "$text"
     pwx_0=$password
     notEmptyPwx "$text" $pwx_0
     fi 

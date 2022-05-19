@@ -11,7 +11,7 @@ unset tegra_version[3]
 unset cpu_verstion
 unset confirm
 unset dateX
-source /opt/tp/scripts/start.sh 1
+source /opt/tp/scripts/generalPrint.sh
 
 Green='\033[0;32m'
 Red='\033[0;31m'

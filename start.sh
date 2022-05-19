@@ -11,7 +11,7 @@ unset tegra_version[3]
 unset cpu_verstion
 unset confirm
 unset dateX
-source /opt/tp/scripts/generalPrint.sh
+source /opt/tp/scripts/start.sh 1
 
 Green='\033[0;32m'
 Red='\033[0;31m'
@@ -21,7 +21,7 @@ NC='\033[0m'
 
 
 
-Global_sw_hw_conf(){
+GlobalSwHwConf(){
     #tipo de procesador             
     kernel_data[0]=$(lscpu | sed -n 1p | sed -r 's/.*\ +(\w+).*/\1/')
     #tipo de sistema operativo 
@@ -49,7 +49,7 @@ Global_sw_hw_conf(){
 
 
 # Seccion de validacion para la carga de dependencia tanto como de una SBC o Cloud 
-Verify_Kernel_Conf(){
+VerifyKernelConf(){
     #tipo de procesador      
     kernel_data[0]=$(lscpu | sed -n 1p | sed -r 's/.*\ +(\w+).*/\1/')
     #tipo de sistema operativo 
@@ -58,7 +58,7 @@ Verify_Kernel_Conf(){
 if [[ ${kernel_data[0]} == "x86_64" && ${kernel_data[1]} == "Linux" ]]; then
     printf "${Cyan} This is a AMD/INTEL X86-64 device ${NC} \n"
     
-    Global_sw_hw_conf
+    GlobalSwHwConf
 
 elif [[ ${kernel_data[0]} == "aarch64" && ${kernel_data[1]} == "Linux" ]]; then
 
@@ -69,14 +69,14 @@ elif [[ ${kernel_data[0]} == "aarch64" && ${kernel_data[1]} == "Linux" ]]; then
     #version de las librerias de L4T(linux for tegra)
     tegra_version[2]="${tegra_version[0]}.${tegra_version[1]}"
 
-    Global_sw_hw_conf
+    GlobalSwHwConf
 
     if [[ -f "/etc/nv_tegra_release" ]]; then
     printf "${Blue} Library of jetson L4T:  ${Green} ${tegra_version[2]}${NC} \n"
     fi
 #si en caso no es detectado el tipo de procesador
 elif [[ ${kernel_data[0]} == "unknown" || ${kernel_data[1]} == "Linux" ]]; then
-    Global_sw_hw_conf
+    GlobalSwHwConf
     printf "${Red}Warning the CPU architecture was'nt recognized its possible of any building not works ${NC} \n"
 else 
     printf "${Red}Warning this Operative System was not contenplated on this automatization ${NC} \n"
@@ -87,7 +87,7 @@ else
 fi
 }
 
-Password_Hider() {
+PasswordHider() {
     echo -n "$1"
     password=""
     while IFS= read -r -n1 -s char; do
@@ -105,50 +105,48 @@ Password_Hider() {
     ;;
     esac
     done
-    echo 
+    echo -ne "\n"
 }
 
-Check_Passwd_Chain(){
+CheckPasswdChain(){
     passwx=$1
     result=$(echo "$passwx" | cracklib-check | sed -r 's/[a-z]+:\ //')
     if [[ $result != "OK" ]]; then
     printf "${Cyan}Password with low special characters \n ${NC}"
-    Password_Hider "ingress your new password:"
+    PasswordHider "ingress your new password:"
     passwx=$password
-    Check_security $passwx
+    CheckPasswdChain $passwx
     fi
 }
 
 
-Val_passwd(){
+valPasswd(){
     pwx_0=$1
     pwx_1=$2
 
     if [[ $pwx_0 != $pwx_1  ]]; then
     printf "${Red}Passwords do not match \n${NC}"
-    Password_Hider "ingress your new password:" 
+    PasswordHider "ingress your new password:" 
     pwx_0=$password
-    Check_security $pwx_0
-    Password_Hider "repeat the new password:"  
+    CheckPasswdChain $pwx_0
+    PasswordHider "repeat the new password:"  
     pwx_1=$password
 
-    Val_passwd $pwx_0 $pwx_1
+    valPasswd $pwx_0 $pwx_1
     fi 
 }
 
 
 
-Create_User(){
+CreateUser(){
     #Generacion de Usuarios 
     read -p "User: " user
-    Password_Hider "ingress your new password:"
+    PasswordHider "ingress your new password:"
     pwx_0=$password
-    Check_security $pwx_0
-    Password_Hider "repeat the new password:"
+    CheckPasswdChain $pwx_0
+    PasswordHider "repeat the new password:"
     pwx_1=$password
-
-    Val_passwd $pwx_0 $pwx_1
-
+    valPasswd $pwx_0 $pwx_1
     validate=$pwx_1
     directory="/home/$user/"
 
@@ -166,7 +164,7 @@ Create_User(){
 
     read -p "Desea crear otro usuario y/n?: " confirm
     if [[ $confirm == "y" || $confirm == "Y" ]]; then
-        Create_User
+        CreateUser
     fi
 
 }
@@ -225,10 +223,10 @@ done
 Main(){
 #Caracteristicas del Sistema operativo
 if [[ $1 != "1" ]]; then 
-    Verify_Kernel_Conf    
+    VerifyKernelConf    
     #Creacion de usuarios
     read -p " Desea crear usuarios adicionales (y/n)?: " confirm
-    if [[ $confirm == "y" || $confirm == "Y" ]]; then Create_User ;fi
+    if [[ $confirm == "y" || $confirm == "Y" ]]; then CreateUser ;fi
 
     Menu
 

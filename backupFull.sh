@@ -1,10 +1,13 @@
 #!/bin/bash
 #AUTHOR: AlphanetEX, backup mode
+#bash orientado a .bashrc
 unset disk_uuid[3]
 source /opt/tp/scripts/generalPrint.sh
 
 #obtener las variables del archivo .env
-[ ! -f .env ] || export $(grep -v '^#' .env | xargs)
+set -o allexport
+source /opt/tp/scripts/.env
+set +o allexport
 
 #valida los uuids registrados en conf_raid.sh  >> .env comparandose con los discos actualmente montados
 function ValidateUuids {
@@ -17,32 +20,37 @@ function ValidateUuids {
     if [[ ${disk_uuid[0]} == ${u01} && ${disk_uuid[1]} == ${u02} && ${disk_uuid[2]} == ${u03} ]]; then 
         echo true
     else  
-        Printer_log 3 "Validando UUIDS " "Los UUID de montaje no coinciden"
+        PrinterLog 3 "Validando UUIDS " "Los UUID de montaje no coinciden"
         echo false
     fi 
 }
 
 function BackupFiles {
-    #this regex only works with 3 layers of FHS (NOT STABLE)
-    dir_sed=$(echo $1 | sed -r 's/\/(\w+\d?)\/?(\w+\d?)?\/+?/\1\2/') 
-    #se valida la exitencia de ambos directorios
-    if [[ -d $1 && -d $2 ]]; then 
-        #se obtiene la fecha 
-        dateX=$(date +"%Y%m%d")
-        #se genera el nombre del paquete a comprimir
-        name_tar="${dir_sed}_bkp_${dateX}.tar.gz"
-        pushd $1 > /dev/null 2<&1
-        #se crea el paquete y se comprime
-        tar cfz $name_tar *
-        #se mueve el archivo a la ruta de destino
-        mv $name_tar $2
-        popd > /dev/null 2<&1
-        #se valida si el comprimido llego al destino 
-        if [[ -e $2$name_tar ]]; then
-            PrinterLog 1 "Backup de el directorio $1" "Backup realizado con exito respalado en $2"
-        fi 
-    else
-        PrinterLog 3 "Backup de el directorio $1" "error no se encuentra la existencia del directorio $1 o $2"
+    #funcion de ayuda item 4.5
+    if [[ $1  == "-h" ]]; then  
+    echo "BackupFiles <origen> <destino>"
+    else 
+        #this regex only works with 3 layers of FHS (NOT STABLE)
+        dir_sed=$(echo $1 | sed -r 's/\/(\w+\d?)\/?(\w+\d?)?\/+?/\1\2/') 
+        #se valida la exitencia de ambos directorios
+        if [[ -d $1 && -d $2 ]]; then 
+            #se obtiene la fecha 
+            dateX=$(date +"%Y%m%d")
+            #se genera el nombre del paquete a comprimir
+            name_tar="${dir_sed}_bkp_${dateX}.tar.gz"
+            pushd $1 > /dev/null 2<&1
+            #se crea el paquete y se comprime
+            tar cfz $name_tar *
+            #se mueve el archivo a la ruta de destino
+            mv $name_tar $2
+            popd > /dev/null 2<&1
+            #se valida si el comprimido llego al destino 
+            if [[ -e $2$name_tar ]]; then
+                PrinterLog 1 "Backup de el directorio $1" "Backup realizado con exito respalado en $2"
+            fi 
+        else
+            PrinterLog 3 "Backup de el directorio $1" "error no se encuentra la existencia del directorio $1 o $2"
+        fi
     fi
 }
 
@@ -63,11 +71,6 @@ function BackupB {
     BackupFiles /u01/ /u03/
     BackupFiles /u02/ /u03/
     fi
-}
-
-#funcion de ayuda item 4.5
-function -h {
-    echo "BackupFiles <origen> <destino>"
 }
 
 #se administra  x cantidad de argumentos de entrada 

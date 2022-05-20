@@ -37,7 +37,7 @@ function mailConf {
     read -p "Ingrese su Correo electronico(gmail): " email
     email=$(notEmpty "Ingrese su Correo electronico(gmail): " $email)
     PasswordHider "ingrese la contrasenia del correo: "
-    pwx_0=$assword
+    pwx_0=$password
     #validacion de espcio en blanco de la  passwd
     notEmptyPwx "ingrese la contrasenia del correo: " $pwx_0
     read -p "Ingrese su nombre de Mail: " namemail
@@ -86,4 +86,9 @@ EOF
 
 rm cron_task
 
+#ask for this script ejecution 
+
+echo "source $PWD/backupFull.sh" >> ~/.bashrc
+#pasar a esta ubicacion opcion b
+#sudo -s backupFull.sh /usr/local/bin/backupFull
 #seccion de iptables

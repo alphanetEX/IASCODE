@@ -77,8 +77,8 @@ EOF
 mailConf
 
 cat <<EOF >> cron_task; crontab -u root cron_task
-00 11 * * * /opt/tp/scripts/backup_full.sh BackupA
-00 11 * * 0 /opt/tp/scripts/backup_full.sh BackupB
+00 11 * * * /opt/tp/scripts/backupFull.sh BackupA
+00 11 * * 0 /opt/tp/scripts/backupFull.sh BackupB
 0 0 * * *   /opt/tp/scripts/testEsLaborable.sh
 * * * * *   /opt/tp/scripts/monitor.sh apache2 > /dev/null 2>&1
 * * * * *   /opt/tp/scripts/monitor.sh mysqld  > /dev/null 2>&1

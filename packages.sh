@@ -26,6 +26,7 @@ sudo apt-get install php libapache2-mod-php php-mysql -y
 #mysql packages  continue here 
 sudo -S apt-get install gnupg -y
 cd /tmp/
+sudo wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
 #automatizar con 4\n la opcion ok de mysql 
 DEBIAN_FRONTEND=noninteractive dpkg -i mysql-apt-config*
 # Install MySQL Server in a Non-Interactive mode. Default root password will be "${PASS_MYSQL_ROOT}"

@@ -11,8 +11,8 @@ sudo mkdir -p tp/scripts
 cd tp/
 sudo git clone https://github.com/alphanetEX/srv-tp.git scripts/
 cd scripts/
-sudo chmod 750 confRaid.sh  diskFormatter.sh lampConf.sh packages.sh esLaborable.sh testEsLaborable.sh mailFireMonitor.sh monitor.sh
-sudo chmod 733 generalPrint.sh backupFull.sh
+sudo chmod 750 start.sh confRaid.sh  diskFormatter.sh lampConf.sh packages.sh esLaborable.sh testEsLaborable.sh mailFireMonitor.sh monitor.sh start.sh 
+sudo chmod 733 generalPrint.sh backupFull.sh 
 sudo bash start.sh
 ```
 
@@ -44,4 +44,5 @@ $ sudo bash start.sh
 ```
 ###### si en caso hay problemas de ejecucion ejecute permisos 750 a cada unos de los archivos del directorio
 
+###### las cosas no se dicen, se hacen, porque al hacerlas se dicen solas ~Woody Allen
 

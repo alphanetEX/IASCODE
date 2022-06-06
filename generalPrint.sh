@@ -27,7 +27,7 @@ function PrinterLog {
         #envio de log del backup al mail 
         printf "${message}\n" >> /opt/tp/scripts/emailSender.log
         echo "" | mutt -s "Backup Process" -i emailSender.log -a emailSender.log -c ${DESTEMAIL}
-        echo "" > emailSender.log
+        echo "" > /opt/tp/scripts/emailSender.log
     #codigos de monior
     elif [[ $1 == 2 ]]; then 
         dateX=$(date +"%H:%M:%S")

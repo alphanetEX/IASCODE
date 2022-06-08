@@ -17,9 +17,9 @@ LvmCreation(){
     #using /md0
     vgcreate vg_tp  /dev/md0
 
-    lvcreate -n lv_www -L 2g vg_tp 
-    lvcreate -n lv_db -L 2g vg_tp
-    lvcreate -n lv_backup -L 2g vg_tp
+    lvcreate -n lv_www -L 5g vg_tp 
+    lvcreate -n lv_db -L 7g vg_tp
+    lvcreate -n lv_backup -L 10g vg_tp
 
     mkfs.ext4 /dev/vg_tp/lv_www
     mkfs.ext4 /dev/vg_tp/lv_db

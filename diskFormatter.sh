@@ -40,7 +40,7 @@ val_existence(){
 
 Disk_formatter(){
 
-dec=98 #equivale a valor ascii de b
+dec=99 #equivale a valor ascii de c
 counter=0
 counter_disk=0
 
@@ -61,12 +61,12 @@ while [ $counter -lt $cant ]
     if [[ $validator == true ]]; then  
         #RAID1
         if [[ $receptor == 1  ]]; then
-        sudo -S sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<< $fdisk_raid_cmd | sudo -S fdisk /dev/xvd$alphabet >> disk_formatter.log 2<&1
+        sudo -S sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<< $fdisk_raid_cmd | sudo -S fdisk /dev/sd$alphabet >> disk_formatter.log 2<&1
         ((counter ++));
         ((dec ++));
         #LVM
         elif [[ $receptor == 2 ]]; then 
-        sudo -S sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<< $fdisk_lvm_cmd | sudo -S fdisk /dev/xvd$alphabet >> disk_formatter.log 2<&1
+        sudo -S sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<< $fdisk_lvm_cmd | sudo -S fdisk /dev/sd$alphabet >> disk_formatter.log 2<&1
         ((counter ++));
         ((dec ++));
         else

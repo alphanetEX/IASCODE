@@ -31,10 +31,10 @@ y
 "
 
 val_existence(){
-    if [[ -e  "/dev/xvd$1" ]]; then
+    if [[ -e  "/dev/sd$1" ]]; then
         echo true
     else 
-        echo "the /dev/xvd$1 was not found \n"
+        echo "the /dev/sd$1 was not found \n"
     fi
 }
 

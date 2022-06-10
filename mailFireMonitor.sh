@@ -82,6 +82,7 @@ cat <<EOF >> cron_task; crontab -u root cron_task
 0 0 * * *   /opt/tp/scripts/testEsLaborable.sh
 * * * * *   /opt/tp/scripts/monitor.sh apache2 > /dev/null 2>&1
 * * * * *   /opt/tp/scripts/monitor.sh mysqld  > /dev/null 2>&1
+@reboot     /usr/sbin/iptables-restore < /opt/tp/scripts/fw.save
 EOF
 
 rm cron_task
